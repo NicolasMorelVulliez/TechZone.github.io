@@ -3,13 +3,12 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     font-family: 'Lato', sans-serif;
     
 }
 
 
-body {
+.body-productos{
     background-color: #11172a;
 }
 
@@ -60,12 +59,9 @@ header {
         color: #7f6fbb;
 
     }
-
-
     .nav {
         opacity: 0;
         visibility: hidden;
-
         display: flex;
         flex-direction: column;
         align-items: end;
@@ -77,6 +73,15 @@ header {
         background-color: #7f6fbb;
         padding: 2rem;
         box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .5);
+    }
+    .body-productos{
+        box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .5);
+        top: 0;
+        right: 0;
+        bottom: 0;
+        align-items: end;
+        
+
     }
 
     .nav.visible {
@@ -115,32 +120,36 @@ header {
 /*TERMINA EL FOOTER*/
 
 /*CARD DE CADA PRODUCTO*/
-.card {
+.card-producto {
     position: relative;
     width: 320px;
     height: 480px;
-    background-color: RED;
+    background: #6351ac;
+    border: 5px solid black;
     border-radius: 20px;
     overflow: hidden;
+    margin: 10px;
 }
 
-.card::before {
+.card-producto::before {
     content: "";
     position: absolute;
     top: -50%;
+    right: .001%;
     width: 100%;
     height: 100%;
-    background: #444;
+    background: #181818;
     transform: skewY(345deg);
     transition: 0.5s;
+    border: 1px solid black;
 }
 
-.card:hover::before {
+.card-producto:hover::before {
     top: -70%;
     transform: skewY(390deg);
 }
 
-.card::after {
+.card-producto::after {
     content: "";
     position: absolute;
     bottom: 0;
@@ -150,7 +159,7 @@ header {
     color: rgba(0, 0, 0, 0.1);
 }
 
-.card .imgBox {
+.card-producto .imgBox {
     position: relative;
     width: 100%;
     display: flex;
@@ -159,20 +168,7 @@ header {
     padding-top: 20px;
     z-index: 1;
 }
-
-/*
-  .card .imgBox img {
-      max-width: 100%;
-  
-      transition: .5s;
-  }
-  
-  .card:hover .imgBox img {
-      max-width: 50%;
-  
-  }
-  */
-.card .contentBox {
+.card-producto .contentBox {
     position: relative;
     padding: 20px;
     display: flex;
@@ -182,7 +178,7 @@ header {
     z-index: 2;
 }
 
-.card .contentBox h3 {
+.card-producto .contentBox h3 {
     font-size: 18px;
     color: black;
     font-weight: 500;
@@ -190,29 +186,29 @@ header {
     letter-spacing: 1px;
 }
 
-.card .contentBox .price {
+.card-producto .contentBox .price {
     font-size: 24px;
     color: black;
     font-weight: 700;
     letter-spacing: 1px;
 }
 
-.card .contentBox .buy {
+.card-producto .contentBox .buy {
     position: relative;
     top: 100px;
     opacity: 0;
     padding: 10px 30px;
-    margin-top: 15px;
+    margin-top: 10px;
     color: #000000;
     text-decoration: none;
-    background: #6351ac;
+    background: #b9add9;
     border-radius: 30px;
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: 0.5s;
 }
 
-.card:hover .contentBox .buy {
+.card-producto:hover .contentBox .buy {
     top: 0;
     opacity: 1;
 }
@@ -221,3 +217,5 @@ header {
     height: 300px;
     width: auto;
 }
+
+/*LISTADO DE PRODUCTOS*/
