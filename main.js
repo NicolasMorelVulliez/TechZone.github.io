@@ -12,8 +12,6 @@ cerrar.addEventListener("click", () => {
 })
 //NAVBAR
 
-//Productos
-
 //Cargando el JSON DE la BD 
 //funcion que muestre los productos
 const listado = document.getElementById('listado');
@@ -21,16 +19,17 @@ const listadoProductos = "json/productos.json";
 
 let carrito = [];
 let productos = [];
-
+let botones = [];
 fetch(listadoProductos)
     .then(respuesta => respuesta.json())
     .then(datos => {
+        productos=datos
         datos.forEach(producto => {
             mostrarProductos(producto)
-            productos.push(producto)
-
         })
+        iniciarEventListeners();
     })
+
     .catch(error => console.log(error))
 
 
@@ -49,16 +48,19 @@ function mostrarProductos(producto) {
             <div class="contentBox">
                 <h3>${producto.nombre}</h3>
                 <h2 class="price">$${producto.precio}</h2>
-                <button class="buy" id="${producto.id}-boton">Agregar Carrito</button>
+                <button class="buy" id="${producto.id}">Agregar Carrito</button>
             </div>
         </div>`
+}
 
-        const agregarCarrito = document.getElementById(`${producto.id}-boton`);
-        agregarCarrito.addEventListener("click", () => {
-            agregarCarrito(id)
-            alert("Agregaste al carrito");
-    })
-
+function iniciarEventListeners(){
+    listado.addEventListener("click", event => {
+        const agregarCarritoBtn = event.target.closest(".buy");
+        if (agregarCarritoBtn) {
+            const productId = agregarCarritoBtn.id.split("-")[0];
+            agregarCarrito(Number(productId));
+        }
+    });
 }
 
 function agregarCarrito(id) {
@@ -72,8 +74,10 @@ function agregarCarrito(id) {
             'success'
         )
     } else {
-        const producto = productos.find(producto => producto.id == id);
-        carrito.push(producto);
+        const producto = productos.find(producto => producto.id === id);
+        console.log(producto,productos)
+    
+        carrito.push({...producto,cantidad: 1});
         Swal.fire(
             'Agregaste el producto al carrito',
             '',
@@ -81,8 +85,16 @@ function agregarCarrito(id) {
         )
     }
     localStorage.setItem("carrito", JSON.stringify(carrito));
-    mostrarCarrito()
 }
+
+
+
+
+
+
+
+
+
 
 
 
