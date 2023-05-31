@@ -42,8 +42,7 @@ function mostrarProductos(producto) {
     listado.innerHTML += `
             <div class="card-producto mx-auto col-xs-9 col-sm-9 col-md-9 col-lg-5 col-xl-5">
                 <div class="imgBox">
-                    <img src="${producto.img}"
-                    alt="${producto.nombre}" class="mouse">
+                    <img src="${producto.img}" alt="${producto.nombre}" class="mouse">
             </div>
             <div class="contentBox">
                 <h3>${producto.nombre}</h3>
