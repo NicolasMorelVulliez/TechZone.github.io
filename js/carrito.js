@@ -4,12 +4,12 @@ const contenedorCarrito = document.getElementById("contenedorCarrito");
 if (localStorage.getItem("carrito")) {
     carrito = JSON.parse(localStorage.getItem("carrito"));
 }
-const lengthCarrito = carrito.length
+
 
 
 function CargarCarrito(){
     CargarEncabezadoTabla();
-    if(lengthCarrito === 0){
+    if(carrito.length === 0){
         CargarCarritoVacio();
     } else{
         mostrarCarrito();
@@ -86,7 +86,8 @@ const mostrarCarrito = () => {
         botonEliminar.addEventListener("click",()=>{
             eliminarProducto(id);
 
-        } );
+        })
+        
     })
 }
 
@@ -122,7 +123,6 @@ function eliminarCarrito() {
     carrito = [];
     localStorage.setItem("carrito", JSON.stringify(carrito));
     CargarCarrito();
-    CargarCarritoVacio();
 }
 
 //ELIMAR PRODCUTO DEL CARRITO
@@ -132,14 +132,6 @@ function eliminarProducto(id) {
     carrito.splice(index, 1);
     localStorage.setItem("carrito", JSON.stringify(carrito));
     CargarCarrito();
-    if (carrito.length === 0) {
-        CargarCarritoVacio();
-    }else{
-
-    }
-    
-
-    
 }
 
 CargarCarrito ()

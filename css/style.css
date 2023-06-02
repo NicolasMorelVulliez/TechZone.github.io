@@ -48,6 +48,7 @@ header {
 
     .abrir-menu,
     .cerrar-menu {
+        z-index: 1;
         display: block;
         border: 0;
         font-size: 1.3rem;
@@ -56,10 +57,12 @@ header {
     }
 
     .abrir-menu {
+        z-index: 1;
         color: #7f6fbb;
 
     }
     .nav {
+        z-index: 3;
         opacity: 0;
         visibility: hidden;
         display: flex;
@@ -80,8 +83,6 @@ header {
         right: 0;
         bottom: 0;
         align-items: end;
-        
-
     }
 
     .nav.visible {
@@ -99,6 +100,13 @@ header {
     .nav-list li a {
         color: #11172a;
     }
+    
+    .card-producto{
+        width: 200px;
+        height: 200px;
+    }
+
+    
 
 }
 
@@ -128,7 +136,7 @@ header {
     border: 5px solid black;
     border-radius: 20px;
     overflow: hidden;
-    margin: 10px;
+    margin: 25px;
 }
 
 .card-producto::before {
