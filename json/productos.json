@@ -1,6 +1,6 @@
 [
-    {"nombre":"NVIDIA RTX 4090", "precio":480000, "id": 1, "img":"/img/productos/RTX-4090.png"},
-    {"nombre":"NVIDIA RTX 4080", "precio":450000, "id": 2, "img":"/img/productos/RTX-4080.png"},
+    {"nombre":"NVIDIA RTX 4090", "precio":480000, "id": 1, "img":"img/productos/RTX-4090.png"},
+    {"nombre":"NVIDIA RTX 4080", "precio":450000, "id": 2, "img":"img/productos/RTX-4080.png"},
     {"nombre":"NVIDIA RTX 4070", "precio":420000, "id": 3, "img":"/img/productos/RTX-4070.png"},
     {"nombre":"NVIDIA RTX 4060", "precio":400000, "id": 4, "img":"/img/productos/RTX-4060.png"},
     {"nombre":"NVIDIA RTX 4050", "precio":380000, "id": 5, "img":"/img/productos/RTX-3050.png"},
