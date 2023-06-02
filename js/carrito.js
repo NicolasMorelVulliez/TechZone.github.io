@@ -65,7 +65,7 @@ const mostrarCarrito = () => {
         td3.setAttribute("class", "maxWitdh-200px ",);
         td1.innerHTML = `
         <div class="cart-info">
-            <img class="img-fluid" src="${producto.img}" alt="${producto.nombre}">
+            <img class="img-fluid" src="../${producto.img}" alt="${producto.nombre}">
             <div>
                 <p class="text-light">${producto.nombre}</p>
                 <small class="text-light">Precio: $${precio.toLocaleString('en-US')} 1/ud.</small>
