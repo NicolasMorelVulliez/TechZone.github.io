@@ -320,3 +320,24 @@ th:last-child{
 .display-none{
     display: none;
 }
+
+.btn-comprar{
+    cursor: pointer;
+    display: inline-block;
+    background-color: #fff;
+    color: var(--paleta1);
+    font-weight: bold;
+    padding: 8px 90px;
+    margin: 30px 0;
+    border-radius: 30px;
+    border: 2px solid var(--paleta1);
+    transition: all 0.2s;
+}
+
+.btn-comprar:hover{
+    transform: scale(1.1);
+}
+
+.p-descontado{
+    text-decoration: line-through;
+}

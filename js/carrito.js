@@ -1,19 +1,65 @@
 //BOTONES PARA VER CARRITO EN PANTALLA 
 const contenedorCarrito = document.getElementById("contenedorCarrito");
+const contenedorPrecioFinal = document.getElementById("precioTotal");
 
 if (localStorage.getItem("carrito")) {
     carrito = JSON.parse(localStorage.getItem("carrito"));
 }
 
+const TotalCarrito = () => {
+    return (!carrito) ? 0 : carrito.reduce((acc, prod) => acc + (prod.precio * prod.cantidad), 0);
+}
+const CantidadDeProductos = () => {
+    return carrito.reduce((acc, prod) => acc + parseInt(prod.cantidad), 0);
+}
+//CARGAR TOTAL 
+const CargarTotal = () => {
+    console.log("funciona o no ?")
+    contenedorPrecioFinal.innerHTML = ``;
+    const total = TotalCarrito();
+    const CantidadProductos = CantidadDeProductos();
+    const ContenedorTable = document.createElement('table');
+    ContenedorTable.innerHTML = `
+        <tr>
+            <td class="text-light">SubTotal</td>
+            <td class="text-light">$${(total).toLocaleString('en-US')}</td>
+        </tr>
+
+        <tr>
+            <td class="text-light">Total</td>
+            <td class="text-light">Total de ${CantidadProductos} productos</td>
+        </tr>
+        <tr>
+            <td><a class="btn-comprar" id="comprar-btn">Comprar</a></td>
+        </tr>
+    `;
+    contenedorPrecioFinal.appendChild(ContenedorTable);
+
+    //Evento: Se presiono el boton de compra
+    const btnComprar = document.getElementById("comprar-btn");
+    btnComprar.addEventListener('click', () => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Buena Elección!',
+            text: 'Su compra a sido realizada!',
+            footer: 'No se preocupe, usted no ha gastado dinero de verdad'
+        });
+        while (Carrito.length) Carrito.pop();
+        setToDataBase('carrito', Carrito);
+        CargarCarrito();
+        CargarTotal();
+    });
+}
 
 
-function CargarCarrito(){
+function CargarCarrito() {
     CargarEncabezadoTabla();
-    if(carrito.length === 0){
+    if (carrito.length === 0) {
         CargarCarritoVacio();
-    } else{
+    } else {
         mostrarCarrito();
     }
+    CargarTotal();
 
 }
 
@@ -74,7 +120,6 @@ const mostrarCarrito = () => {
             </div>
         </div>
     `;
-        
         td2.innerHTML = `<input  type="number" value="${producto.cantidad}">`;
         td3.innerHTML = `<p class="text-light">$${(precio * cantidad).toLocaleString('en-US')}</p>`;
         tr.appendChild(td1);
@@ -83,11 +128,40 @@ const mostrarCarrito = () => {
         contenedorCarrito.appendChild(tr);
 
         const botonEliminar = document.getElementById(`eliminar-${producto.id}`);
-        botonEliminar.addEventListener("click",()=>{
+        botonEliminar.addEventListener("click", () => {
             eliminarProducto(id);
 
         })
-        
+        const quantityInput = document.querySelector(`#producto-${id} td input`);
+        quantityInput.addEventListener('change', () => {
+            if (quantityInput.value < 0) {
+                quantityInput.value = 0;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Cantidad Invalida',
+                    footer: '<a href="">Why do I have this issue?</a>'
+                });
+            }
+            if (quantityInput.value > 999) {
+                quantityInput.value = 999;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Cantidad Invalida',
+                    footer: '<a href="">Why do I have this issue?</a>'
+                });
+            }
+            const precioTotalDelProducto = document.querySelector(`#producto-${id}`).lastElementChild;
+            const nuevoPrecio = precio * quantityInput.value;
+            precioTotalDelProducto.innerHTML = `<p class="text-light">$${(nuevoPrecio).toLocaleString('en-US')}</p>`;
+            carrito[producto.id].cantidad = quantityInput.value;
+            setToDataBase('carrito', carrito);
+            CargarTotal();
+        })
+
+
+
     })
 }
 
@@ -97,7 +171,7 @@ const mostrarCarrito = () => {
 const vaciarCarrito = document.getElementById("vaciar-carrito");
 vaciarCarrito.addEventListener("click", deseaEliminarCarrito);
 
-function deseaEliminarCarrito(){
+function deseaEliminarCarrito() {
     Swal.fire({
         title: 'Estas seguro que desea vaciar su carrito?',
         text: "Estos cambios no se podran revertir!",
@@ -134,4 +208,12 @@ function eliminarProducto(id) {
     CargarCarrito();
 }
 
-CargarCarrito ()
+CargarCarrito()
+
+
+
+
+
+
+
+
